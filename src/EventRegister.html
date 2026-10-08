@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Event Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .form-box {
+            width: 400px;
+            margin: 40px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-box">
+    <h2>Event Registration</h2>
+
+    <form id="eventForm">
+
+        <label>Participant Name</label>
+        <input type="text" id="name" placeholder="Enter participant name">
+
+        <label>Age</label>
+        <input type="number" id="age" placeholder="Enter age">
+
+        <label>Participant Type</label>
+        <select id="type">
+            <option value="">Select type</option>
+            <option value="Student">Student</option>
+            <option value="Faculty">Faculty</option>
+            <option value="Professional">Professional</option>
+        </select>
+
+        <label>No. of Participants</label>
+        <input type="number" id="participants" placeholder="Enter number">
+
+        <label>Phone Number</label>
+        <input type="text" id="phone" placeholder="Enter 10-digit phone number">
+
+        <label>Participant Email</label>
+        <input type="text" id="email" placeholder="Enter email">
+
+        <label>Department</label>
+        <input type="text" id="department" placeholder="Enter department">
+
+        <button type="submit">Register</button>
+
+        <div id="message"></div>
+
+    </form>
+</div>
+
+<script>
+    document.getElementById("eventForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name = document.getElementById("name").value.trim();
+        let age = document.getElementById("age").value;
+        let type = document.getElementById("type").value;
+        let participants = document.getElementById("participants").value;
+        let phone = document.getElementById("phone").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let department = document.getElementById("department").value.trim();
+
+        // Name validation
+        if (name === "") {
+            alert("Please enter participant name");
+            return;
+        }
+
+        // Age validation
+        if (age === "" || age < 5 || age > 100) {
+            alert("Please enter a valid age");
+            return;
+        }
+
+        // Participant type validation
+        if (type === "") {
+            alert("Please select participant type");
+            return;
+        }
+
+        // Number of participants validation
+        if (participants === "" || participants < 1) {
+            alert("Number of participants must be at least 1");
+            return;
+        }
+
+        // Phone validation
+        if (!/^[0-9]{10}$/.test(phone)) {
+            alert("Phone number must contain exactly 10 digits");
+            return;
+        }
+
+        // Email validation
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+
+        // Department validation
+        if (department === "") {
+            alert("Please enter department");
+            return;
+        }
+
+        document.getElementById("message").innerHTML =
+            "Registration successful!";
+
+        document.getElementById("message").style.color = "green";
+
+        document.getElementById("eventForm").reset();
+    });
+</script>
+
+</body>
+</html>
